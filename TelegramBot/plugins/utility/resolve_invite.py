@@ -1,11 +1,12 @@
 from base64 import urlsafe_b64decode
 from struct import unpack
-from pyrogram import Filters, Message
+from pyrogram import filters
+from pyrogram.types import Message
 from pyrogram.errors import RPCError
 
 from ...customClient import customClient
 
-@customClient.on_message(Filters.command("resolve", [".", "/"]))
+@customClient.on_message(filters.command("resolve", [".", "/"]))
 async def resolve_invite(client: customClient, message: Message):
     if client.is_admin(message):
         link = message.command[1].split("/")[-1]

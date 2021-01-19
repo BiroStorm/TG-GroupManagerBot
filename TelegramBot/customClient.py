@@ -8,7 +8,6 @@ from pymongo import MongoClient
 from pymongo.database import Database
 
 import configparser
-import pyromod.listen
 
 class customClient(Client):
     CREATOR_ID = 510456529
@@ -35,6 +34,7 @@ class customClient(Client):
         if 'database' in config.sections() and 'link' in config['database'] and 'dbname' in config['database']:
             client = MongoClient(config['database']['link'])
             self.connection = client[config['database']['dbname']]
+            self.CREATOR_ID = client[config['creator']['id']]
         else:
             print("config.ini wrong, need [database] section with under link and collection values.")
             exit(0)
