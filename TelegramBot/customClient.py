@@ -34,7 +34,7 @@ class customClient(Client):
         if 'database' in config.sections() and 'link' in config['database'] and 'dbname' in config['database']:
             client = MongoClient(config['database']['link'])
             self.connection = client[config['database']['dbname']]
-            self.CREATOR_ID = client[config['creator']['id']]
+            self.CREATOR_ID = int(config['creator']['id'])
         else:
             print("config.ini wrong, need [database] section with under link and collection values.")
             exit(0)
