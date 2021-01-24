@@ -71,39 +71,25 @@ Command | Arguments | Where | Comment
 After copying this project, create a `config.ini` file inside `TelegramBot` directory with:
 
 ```
-
 [pyrogram]
-
 api_id = API_ID
-
 api_hash = API_HASH
-
 bot_token = BOT_TOKEN
 
-  
 
 [plugins]
-
 root = plugins
 
-  
 
 [database]
-
 link = URL_TO_MONGODB
-
 dbname = NAMEOFYOURDB
 
-  
-
 [creator]
-
 id = YOUR_TELEGRAM_ACCOUNT_ID
 
 ```
 
-  
-  
 
 -----
 

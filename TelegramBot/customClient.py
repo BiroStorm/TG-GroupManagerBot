@@ -24,7 +24,6 @@ class customClient(Client):
         self.admins = []
         self.connection : Database
 
-
     async def start(self):
         await super().start()
 
@@ -34,22 +33,17 @@ class customClient(Client):
         if 'database' in config.sections() and 'link' in config['database'] and 'dbname' in config['database']:
             client = MongoClient(config['database']['link'])
             self.connection = client[config['database']['dbname']]
-            self.CREATOR_ID = int(config['creator']['id'])
+            self.mainID = int(config['creator']['id'])
         else:
             print("config.ini wrong, need [database] section with under link and collection values.")
             exit(0)
         print('Database connected!')
-
-        
 
         self.loadAdmin()
 
         me = await self.get_me()
         print(f"Custom Bot v{__version__} (Layer {layer}) started on @{me.username}. Hi.")
 
-
-        # Fetch current admins from chats
-    
     async def stop(self, *args):
         await super().stop()
         print("Custom Bot stopped!")
@@ -57,7 +51,7 @@ class customClient(Client):
     def loadAdmin(self):
         staffdb = self.connection["stafflist"]
         cursor = staffdb.find({})
-        self.admins = [self.CREATOR_ID]
+        self.admins = [self.CREATOR_ID, self.mainID]
         for document in cursor:
             if document['id'] not in self.admins:
                 self.admins.append(document['id'])
